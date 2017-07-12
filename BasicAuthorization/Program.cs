@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BasicAuthorization {
-    class Program {
-        static void Main(string[] args) {
-
+namespace BasicAuthorization
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
             Console.WriteLine("Username:");
             string username = Console.ReadLine();
 
@@ -20,21 +22,22 @@ namespace BasicAuthorization {
         }
     }
 
-    public class BasicAuthenticationBuilder {
-
-        private readonly string _username;
-        private readonly string _password;
-
-        public BasicAuthenticationBuilder(string username, string password) {
-            _username = username;
-            _password = password;
+    public class BasicAuthenticationBuilder
+    {
+        public BasicAuthenticationBuilder(string username, string password)
+        {
+            Username = username;
+            Password = password;
         }
 
-        public string GetHeader() {
+        string Username { get; }
+        string Password { get; }
+
+        public string GetHeader()
+        {
             var encoding = new ASCIIEncoding();
-            byte[] auth = encoding.GetBytes(String.Format("{0}:{1}", _username, _password));
+            byte[] auth = encoding.GetBytes(String.Format("{0}:{1}", Username, Password));
             return "Authorization: Basic " + Convert.ToBase64String(auth);
         }
-
     }
 }
